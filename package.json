@@ -1,0 +1,20 @@
+{
+  "name": "wialon",
+  "version": "0.0.1",
+  "description": "Wialon API client library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Uditha Atukorala <udi@geniusse.com>",
+  "license": "ISC",
+  "repository": "nukedzn/node-wialon",
+  "keywords": [
+    "wialon",
+    "api"
+  ],
+  "dependencies": {
+    "debug": "^2.1.3",
+    "require": "^2.4.17"
+  }
+}

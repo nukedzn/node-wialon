@@ -1,0 +1,13 @@
+# .gitignore
+#
+
+# node / npm
+node_modules
+npm-debug.log
+
+# swap files
+*.swp
+
+# temporary files
+*~
+

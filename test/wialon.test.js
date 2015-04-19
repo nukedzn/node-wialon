@@ -1,25 +1,30 @@
 
 'use strict';
 
-var assert = require( 'assert' );
+var chai   = require( 'chai' );
+var expect = chai.expect;
 var wialon = require( '../' );
 
 describe( 'wialon', function() {
 
+	it( 'should have _options property', function () {
+		expect( wialon ).to.have.property( '_options' );
+	} );
+
 	it( 'should have a session method', function () {
-		assert.equal( typeof wialon.session, 'function' );
+		expect( wialon.session ).to.be.a( 'function' );
 	} );
 
 	it( 'should be able to create a session object', function () {
-		assert.equal( typeof wialon.session(), 'object' );
+		expect( wialon.session() ).to.be.an( 'object' );
 	} );
 
 	it( 'should have a search method', function () {
-		assert.equal( typeof wialon.search, 'function' );
+		expect( wialon.search ).to.be.a( 'function' );
 	} );
 
 	it( 'should be able to create a search object', function () {
-		assert.equal( typeof wialon.search(), 'object' );
+		expect( wialon.search() ).to.be.an( 'object' );
 	} );
 
 } );

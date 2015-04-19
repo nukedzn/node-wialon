@@ -5,6 +5,9 @@
 node_modules
 npm-debug.log
 
+# istanbul
+coverage
+
 # swap files
 *.swp
 

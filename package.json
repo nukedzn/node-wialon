@@ -4,7 +4,7 @@
   "description": "NodeJS wrapper for Wialon Remote API",
   "main": "index.js",
   "scripts": {
-    "lint": "jshint lib",
+    "lint": "jshint lib test",
     "test": "mocha",
     "coverage": "istanbul cover _mocha -- --reporter spec",
     "coveralls": "istanbul cover _mocha --report lcovonly -- --reporter spec && cat ./coverage/lcov.info | coveralls"

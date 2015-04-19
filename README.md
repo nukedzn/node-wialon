@@ -10,3 +10,37 @@ node-wialon
 A NodeJS wrapper implementation for [Wialon Remote API](http://sdk.wialon.com/wiki/en/kit/remoteapi/remoteapi)
 
 
+### Installation
+
+``` sh
+$ npm install --save wialon
+```
+
+### Usage
+
+Send API requests using session object:
+``` js
+var session = require( 'wialon' ).session();
+
+// login credentials
+var credentials = {
+	username : 'wialon_test',
+	password : 'test'
+};
+
+// start a session
+session.start( credentials, function ( err, session ) {
+	console.log( session );
+} );
+
+// send a request
+session.request( 'core/search_items', params, function ( err, data ) {
+
+} );
+
+// close session
+session.end( function ( err, data ) {
+	console.log( data );
+} );
+```
+

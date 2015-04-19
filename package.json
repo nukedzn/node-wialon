@@ -1,6 +1,6 @@
 {
   "name": "wialon",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "NodeJS wrapper for Wialon Remote API",
   "main": "index.js",
   "scripts": {

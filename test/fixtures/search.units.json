@@ -1,0 +1,72 @@
+{
+  "searchSpec": {
+    "itemsType": "avl_unit",
+    "propName": "sys_name",
+    "propValueMask": "*",
+    "sortType": "sys_name",
+    "propType": "property",
+    "or_logic": "0"
+  },
+  "dataFlags": 1,
+  "totalItemsCount": 8,
+  "indexFrom": 0,
+  "indexTo": 0,
+  "items": [
+    {
+      "nm": "Audi_retr",
+      "cls": 2,
+      "id": 717361,
+      "mu": 0,
+      "uacl": 545
+    },
+    {
+      "nm": "BMW (Mr.Norris)",
+      "cls": 2,
+      "id": 734425,
+      "mu": 0,
+      "uacl": 551920075299
+    },
+    {
+      "nm": "Citroen C1-Tom",
+      "cls": 2,
+      "id": 734477,
+      "mu": 0,
+      "uacl": 551920075299
+    },
+    {
+      "nm": "Hummer H1 Mr.Smith",
+      "cls": 2,
+      "id": 734455,
+      "mu": 0,
+      "uacl": 551920075299
+    },
+    {
+      "nm": "Peugeot Partner 6534",
+      "cls": 2,
+      "id": 734422,
+      "mu": 0,
+      "uacl": 551920075299
+    },
+    {
+      "nm": "Samantha's Bicycle",
+      "cls": 2,
+      "id": 734459,
+      "mu": 0,
+      "uacl": 551920075299
+    },
+    {
+      "nm": "TestEU2",
+      "cls": 2,
+      "id": 6582726,
+      "mu": 0,
+      "uacl": 566935683617
+    },
+    {
+      "nm": "TestEU3",
+      "cls": 2,
+      "id": 6582733,
+      "mu": 0,
+      "uacl": 566935683617
+    }
+  ]
+}

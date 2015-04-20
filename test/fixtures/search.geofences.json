@@ -1,0 +1,144 @@
+{
+  "searchSpec": {
+    "itemsType": "avl_resource",
+    "propName": "sys_name",
+    "propValueMask": "*",
+    "sortType": "sys_name",
+    "propType": "property",
+    "or_logic": "0"
+  },
+  "dataFlags": 4097,
+  "totalItemsCount": 2,
+  "indexFrom": 0,
+  "indexTo": 0,
+  "items": [
+    {
+      "nm": "report_template_en",
+      "cls": 3,
+      "id": 98141,
+      "mu": 0,
+      "zl": {
+        "1": {
+          "n": "green_zone",
+          "d": "Hildesheimer Straße, Laatzen, Niedersachsen, Germany",
+          "id": 1,
+          "f": 16,
+          "t": 2,
+          "e": 11826,
+          "c": 2575754874,
+          "b": {
+            "min_x": 9.77413730132,
+            "min_y": 52.3154645013,
+            "max_x": 9.81366233336,
+            "max_y": 52.337050416,
+            "cen_x": 9.79389981734,
+            "cen_y": 52.3262574586
+          }
+        },
+        "2": {
+          "n": "Gurtam",
+          "d": "Expo-Allee, Hannover, Niedersachsen, Germany",
+          "id": 2,
+          "f": 16,
+          "t": 3,
+          "e": 34443,
+          "c": 2574940902,
+          "b": {
+            "min_x": 9.80070757556,
+            "min_y": 52.3156279057,
+            "max_x": 9.81537327098,
+            "max_y": 52.3246139353,
+            "cen_x": 9.80804042327,
+            "cen_y": 52.3201209205
+          }
+        },
+        "3": {
+          "n": "New geofence",
+          "d": "Alton Rd, Miami Beach, FL 33140, USA",
+          "id": 3,
+          "f": 16,
+          "t": 3,
+          "e": 30418,
+          "c": 2568583984,
+          "b": {
+            "min_x": -80.1448494063,
+            "min_y": 25.7922881846,
+            "max_x": -80.1323454443,
+            "max_y": 25.8036066022,
+            "cen_x": -80.1385974253,
+            "cen_y": 25.7979473934
+          }
+        },
+        "4": {
+          "n": "New geofence",
+          "d": "Wülferoder Straße, Niedersachsen, Germany, Hannover",
+          "id": 4,
+          "f": 16,
+          "t": 3,
+          "e": 59953,
+          "c": 2575754874,
+          "b": {
+            "min_x": 9.8394503201,
+            "min_y": 52.3305437026,
+            "max_x": 9.84035981262,
+            "max_y": 52.3311008354,
+            "cen_x": 9.83990506636,
+            "cen_y": 52.330822269
+          }
+        },
+        "5": {
+          "n": "New geofence",
+          "d": "3. Allee, Hannover, Niedersachsen, Germany",
+          "id": 5,
+          "f": 23,
+          "t": 3,
+          "e": 53894,
+          "c": 2575754874,
+          "b": {
+            "min_x": 9.80549988685,
+            "min_y": 52.3250977525,
+            "max_x": 9.80934283217,
+            "max_y": 52.3274520899,
+            "cen_x": 9.80742135951,
+            "cen_y": 52.3262749212
+          }
+        },
+        "6": {
+          "n": "red_zone",
+          "d": "Lissabonner Allee, Hannover, Niedersachsen, Germany",
+          "id": 6,
+          "f": 16,
+          "t": 2,
+          "e": 48007,
+          "c": 2583125598,
+          "b": {
+            "min_x": 9.80604485976,
+            "min_y": 52.3115815913,
+            "max_x": 9.83342484938,
+            "max_y": 52.340039615,
+            "cen_x": 9.81973485457,
+            "cen_y": 52.3258106032
+          }
+        },
+        "7": {
+          "n": "yellow_zone",
+          "d": "Hildesheimer Straße, Laatzen, Niedersachsen, Germany",
+          "id": 7,
+          "f": 16,
+          "t": 2,
+          "e": 4331,
+          "c": 2582965094,
+          "b": {
+            "min_x": 9.79158238875,
+            "min_y": 52.3004294494,
+            "max_x": 9.82312516677,
+            "max_y": 52.3185732074,
+            "cen_x": 9.80735377776,
+            "cen_y": 52.3095013284
+          }
+        }
+      },
+      "uacl": 289406977
+    }
+  ]
+}

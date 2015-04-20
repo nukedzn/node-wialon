@@ -54,12 +54,64 @@ describe( 'search', function () {
 		it( 'should make a search request', function ( done ) {
 			var scope = nock( session.endpoint() )
 				.post( '?svc=core/search_items' )
-				.reply( 200, { items : [] } );
+				.replyWithFile( 200, __dirname + '/fixtures/search.units.json' );
 
 			search.search( 'avl_unit', '*', 0x00000001, function ( err, data ) {
 				expect( err ).to.be.null;
 				expect( data ).to.be.an.instanceof( Array );
 				expect( scope.isDone() ).to.be.true;
+				done();
+			} );
+		} );
+	} );
+
+
+	describe( 'units', function () {
+		it( 'should return unit data', function ( done ) {
+			var scope = nock( session.endpoint() )
+				.post( '?svc=core/search_items' )
+				.replyWithFile( 200, __dirname + '/fixtures/search.units.json' );
+
+			search.units( '*', function ( err, data ) {
+				expect( err ).to.be.null;
+				expect( data ).to.be.an.instanceof( Array );
+				expect( data ).to.have.length.above( 1 );
+				expect( data[0] ).to.have.all.keys( [
+					'nm', 'cls', 'id', 'mu', 'uacl'
+				] );
+				done();
+			} );
+		} );
+	} );
+
+
+	describe( 'geofences', function () {
+		it( 'should return geofence data', function ( done ) {
+			var scope = nock( session.endpoint() )
+				.post( '?svc=core/search_items' )
+				.replyWithFile( 200, __dirname + '/fixtures/search.geofences.json' );
+
+			search.geofences( '*', function ( err, data ) {
+				expect( err ).to.be.null;
+				expect( data ).to.be.an.instanceof( Array );
+				expect( data ).to.have.length.of.at.least( 1 );
+				expect( data[0].zl ).to.exist;
+				done();
+			} );
+		} );
+	} );
+
+
+	describe( 'retranslators', function () {
+		it( 'should return retranslator data', function ( done ) {
+			var scope = nock( session.endpoint() )
+				.post( '?svc=core/search_items' )
+				.replyWithFile( 200, __dirname + '/fixtures/search.retranslators.json' );
+
+			search.retranslators( '*', function ( err, data ) {
+				expect( err ).to.be.null;
+				expect( data ).to.be.an.instanceof( Array );
+				expect( data ).to.have.length.of.at.least( 1 );
 				done();
 			} );
 		} );

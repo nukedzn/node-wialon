@@ -1,0 +1,70 @@
+{
+  "searchSpec": {
+    "itemsType": "avl_retranslator",
+    "propName": "sys_name",
+    "propValueMask": "*",
+    "sortType": "sys_name",
+    "propType": "property",
+    "or_logic": "0"
+  },
+  "dataFlags": 769,
+  "totalItemsCount": 4,
+  "indexFrom": 0,
+  "indexTo": 0,
+  "items": [
+    {
+      "nm": "rt-0001",
+      "cls": 7,
+      "id": 12290000,
+      "mu": 0,
+      "rtro": 0,
+      "rtrc": {
+        "debug": "0",
+        "port": "9877",
+        "protocol": "wialon",
+        "server": "rt.example.com"
+      },
+      "rtru": [
+        {
+          "i": 11677647,
+          "a": "357207000000000",
+          "st": 0
+        },
+        {
+          "i": 11819889,
+          "a": "353816000000000",
+          "st": 0
+        }
+      ],
+      "rtrst": 0,
+      "uacl": -1
+    },
+    {
+      "nm": "rt-0002",
+      "cls": 7,
+      "id": 11870000,
+      "mu": 0,
+      "rtro": 0,
+      "rtrc": {
+        "debug": "0",
+        "port": "20163",
+        "protocol": "wialon",
+        "server": "test.example.com"
+      },
+      "rtru": [
+        {
+          "i": 11807436,
+          "a": "353816000000000",
+          "st": 0
+        },
+        {
+          "i": 11807445,
+          "a": "353816000000000",
+          "st": 0
+        }
+      ],
+      "rtrst": 0,
+      "uacl": -1
+    }
+  ]
+}

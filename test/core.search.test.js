@@ -75,7 +75,7 @@ describe( 'search', function () {
 			search.units( '*', function ( err, data ) {
 				expect( err ).to.be.null;
 				expect( data ).to.be.an.instanceof( Array );
-				expect( data ).to.have.length.above( 1 );
+				expect( data ).to.have.length.of.at.least( 1 );
 				expect( data[0] ).to.have.all.keys( [
 					'nm', 'cls', 'id', 'mu', 'uacl'
 				] );
@@ -95,7 +95,9 @@ describe( 'search', function () {
 				expect( err ).to.be.null;
 				expect( data ).to.be.an.instanceof( Array );
 				expect( data ).to.have.length.of.at.least( 1 );
-				expect( data[0].zl ).to.exist;
+				expect( data[0] ).to.have.all.keys( [
+					'nm', 'cls', 'id', 'mu', 'uacl', 'zl'
+				] );
 				done();
 			} );
 		} );
@@ -112,6 +114,10 @@ describe( 'search', function () {
 				expect( err ).to.be.null;
 				expect( data ).to.be.an.instanceof( Array );
 				expect( data ).to.have.length.of.at.least( 1 );
+				expect( data[0] ).to.have.all.keys( [
+					'nm', 'cls', 'id', 'mu', 'uacl',
+					'rtro', 'rtrc', 'rtru', 'rtrst'
+				] );
 				done();
 			} );
 		} );

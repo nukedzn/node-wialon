@@ -69,6 +69,17 @@ describe( 'session', function() {
 			} );
 		} );
 
+		context( 'when there is no callback', function () {
+			it( 'should use the internal callback method', function ( done ) {
+				var scope = nock( session.endpoint() )
+					.post( '?svc=core/login' )
+					.reply( 200, { eid : 'cfdf5e9dc900991577c10e3934b6c8f0' } );
+
+				session.start( credentials );
+				done();
+			} );
+		} );
+
 		context( 'when API credentials are incorrect', function () {
 			it( 'should return an error object', function ( done ) {
 				var scope = nock( session.endpoint() )
@@ -117,6 +128,18 @@ describe( 'session', function() {
 			session.request( 'dummy', {}, function ( err, data ) {
 				expect( err ).to.be.an.instanceof( Error );
 				expect( err.message ).to.be.string( 'Invalid session' );
+				done();
+			} );
+		} );
+
+		context( 'when there is no callback', function () {
+			it( 'should use the internal callback method', function ( done ) {
+				var svc    = 'core/login';
+				var scope  = nock( session.endpoint() )
+					.post( '?svc=' + svc )
+					.reply( 200, { error : 0 } );
+
+				session.request( svc, {} );
 				done();
 			} );
 		} );

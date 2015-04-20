@@ -59,6 +59,7 @@ describe( 'search', function () {
 			search.search( 'avl_unit', '*', 0x00000001, function ( err, data ) {
 				expect( err ).to.be.null;
 				expect( data ).to.be.an.instanceof( Array );
+				expect( scope.isDone() ).to.be.true;
 				done();
 			} );
 		} );

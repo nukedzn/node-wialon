@@ -63,6 +63,7 @@ describe( 'session', function() {
 
 			session.start( credentials, function ( err, session ) {
 				expect( err ).to.be.null;
+				expect( scope.isDone() ).to.be.true;
 				done();
 			} );
 		} );
@@ -107,7 +108,11 @@ describe( 'session', function() {
 				eid : 'cfdf5e9dc900991577c10e3934b6c8f0'
 			};
 
-			session.end( done );
+			session.end( function ( err, data ) {
+				expect( err ).to.be.null;
+				expect( scope.isDone() ).to.be.true;
+				done();
+			} );
 		} );
 	} );
 

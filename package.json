@@ -16,6 +16,10 @@
     "wialon",
     "api"
   ],
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "dependencies": {
     "debug": "^2.1.3",
     "extend": "^2.0.0",

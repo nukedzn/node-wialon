@@ -63,6 +63,31 @@ describe( 'search', function () {
 				done();
 			} );
 		} );
+
+		context( 'when there is no callback', function () {
+			it( 'should use the internal callback method', function ( done ) {
+				var scope = nock( session.endpoint() )
+					.post( '?svc=core/search_items' )
+					.reply( 200, { items : [] } );
+
+				search.search( 'avl_unit', '*', 0x00000001 );
+				done();
+			} );
+		} );
+
+		context( 'when there is an error response', function () {
+			it( 'should return an error object', function ( done ) {
+				var scope = nock( session.endpoint() )
+					.post( '?svc=core/search_items' )
+					.reply( 200, { error : 4 } );
+
+				search.search( 'avl_unit', '*', 'x', function ( err, data ) {
+					expect( err ).to.be.an.instanceof( Error );
+					expect( err.message ).to.be.string( 'API error: 4' );
+					done();
+				} );
+			} );
+		} );
 	} );
 
 

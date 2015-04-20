@@ -16,7 +16,7 @@ describe( 'session', function() {
 		expect( session ).to.have.property( '_options' );
 	} );
 
-	context( 'endpoint', function () {
+	describe( 'endpoint', function () {
 		it( 'should have a default url', function() {
 			expect( session._options.url ).to.not.exist;
 			expect( session.wialon._options.url ).to.not.exist;
@@ -24,7 +24,7 @@ describe( 'session', function() {
 		} );
 	} );
 
-	context( 'start', function () {
+	describe( 'start', function () {
 		it( 'should validate credentials', function ( done ) {
 			session.start( {}, function ( err, data ) {
 				expect( err ).to.be.an.instanceof( Error );

@@ -10,13 +10,14 @@ node-wialon
 A NodeJS wrapper implementation for [Wialon Remote API](http://sdk.wialon.com/wiki/en/kit/remoteapi/remoteapi)
 
 
-### Installation
+## Installation
 
 ``` sh
 $ npm install --save wialon
 ```
 
-### Usage
+
+## Usage
 
 Send API requests using session object:
 ``` js
@@ -43,4 +44,14 @@ session.end( function ( err, data ) {
 	console.log( data );
 } );
 ```
+
+
+## API Documentation
+
+JSDoc generated API documentation can be found at [http://nukedzn.github.io/node-wialon/docs/](http://nukedzn.github.io/node-wialon/docs/).
+
+
+## Contributing
+
+Contributions are welcome through GitHub pull requests ([using fork & pull model](https://help.github.com/articles/using-pull-requests/#fork--pull)).
 

@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Node-wialon by nukedzn</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Node-wialon</h1>
+        <p>Node.js wrapper for Wialon Remote API</p>
+
+        <p class="view"><a href="https://github.com/nukedzn/node-wialon">View the Project on GitHub <small>nukedzn/node-wialon</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/nukedzn/node-wialon/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/nukedzn/node-wialon/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/nukedzn/node-wialon">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="node-wialon" class="anchor" href="#node-wialon" aria-hidden="true"><span class="octicon octicon-link"></span></a>node-wialon</h1>
+
+<p><a href="https://www.npmjs.com/package/wialon"><img src="https://img.shields.io/npm/v/wialon.svg" alt="npm version"></a>
+<a href="https://travis-ci.org/nukedzn/node-wialon"><img src="https://travis-ci.org/nukedzn/node-wialon.svg?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/r/nukedzn/node-wialon"><img src="https://coveralls.io/repos/nukedzn/node-wialon/badge.svg" alt="Coverage Status"></a>
+<a href="https://david-dm.org/nukedzn/node-wialon"><img src="https://david-dm.org/nukedzn/node-wialon.svg" alt="Dependency Status"></a>
+<a href="https://david-dm.org/nukedzn/node-wialon#info=devDependencies"><img src="https://david-dm.org/nukedzn/node-wialon/dev-status.svg" alt="devDependency Status"></a></p>
+
+<p>A NodeJS wrapper implementation for <a href="http://sdk.wialon.com/wiki/en/kit/remoteapi/remoteapi">Wialon Remote API</a></p>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<div class="highlight highlight-sh"><pre>$ npm install --save wialon</pre></div>
+
+<h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<p>Send API requests using session object:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-k">var</span> session <span class="pl-k">=</span> <span class="pl-c1">require</span>( <span class="pl-s"><span class="pl-pds">'</span>wialon<span class="pl-pds">'</span></span> ).session();
+
+<span class="pl-c">// login credentials</span>
+<span class="pl-k">var</span> credentials <span class="pl-k">=</span> {
+    username <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>wialon_test<span class="pl-pds">'</span></span>,
+    password <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>
+};
+
+<span class="pl-c">// start a session</span>
+session.<span class="pl-c1">start</span>( credentials, <span class="pl-k">function</span> ( <span class="pl-smi">err</span>, <span class="pl-smi">session</span> ) {
+    <span class="pl-en">console</span><span class="pl-c1">.log</span>( session );
+} );
+
+<span class="pl-c">// send a request</span>
+session.request( <span class="pl-s"><span class="pl-pds">'</span>core/search_items<span class="pl-pds">'</span></span>, params, <span class="pl-k">function</span> ( <span class="pl-smi">err</span>, <span class="pl-smi">data</span> ) {
+
+} );
+
+<span class="pl-c">// close session</span>
+session.end( <span class="pl-k">function</span> ( <span class="pl-smi">err</span>, <span class="pl-smi">data</span> ) {
+    <span class="pl-en">console</span><span class="pl-c1">.log</span>( data );
+} );</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/nukedzn">nukedzn</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>

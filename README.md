@@ -21,7 +21,7 @@ $ npm install --save wialon
 
 Send API requests using session object:
 ``` js
-var session = require( 'wialon' ).session();
+var session = require( 'wialon' )().session;
 
 // login credentials
 var credentials = {
@@ -30,8 +30,8 @@ var credentials = {
 };
 
 // start a session
-session.start( credentials, function ( err, session ) {
-	console.log( session );
+session.start( credentials, function ( err, data ) {
+	console.log( data );
 } );
 
 // send a request

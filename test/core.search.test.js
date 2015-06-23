@@ -5,8 +5,8 @@
 var nock    = require( 'nock' );
 var chai    = require( 'chai' );
 var expect  = chai.expect;
-var wialon  = require( '../' );
-var session = wialon.session();
+var wialon  = require( '../' )();
+var session = wialon.session;
 
 describe( 'search', function () {
 

@@ -5,7 +5,7 @@
 var nock    = require( 'nock' );
 var chai    = require( 'chai' );
 var expect  = chai.expect;
-var wialon  = require( '../' );
+var Session = require( '../lib/core/session' );
 
 describe( 'session', function() {
 
@@ -14,18 +14,11 @@ describe( 'session', function() {
 
 	beforeEach( function () {
 
-		// destroy session data
-		wialon._session = {};
-
 		// create new session object
-		session = wialon.session();
+		session = new Session();
 
 	} );
 
-
-	it( 'should have a wialon object', function() {
-		expect( session.wialon ).to.be.an( 'object' );
-	} );
 
 	it( 'should have _options property', function () {
 		expect( session ).to.have.property( '_options' );
@@ -35,7 +28,6 @@ describe( 'session', function() {
 	describe( 'endpoint', function () {
 		it( 'should have a default url', function() {
 			expect( session._options.url ).to.not.exist;
-			expect( session.wialon._options.url ).to.not.exist;
 			expect( session.endpoint() ).to.equal( 'https://hst-api.wialon.com/wialon/ajax.html' );
 		} );
 	} );
@@ -185,7 +177,7 @@ describe( 'session', function() {
 				.reply( 200, { error : 0 } );
 
 			// session data mock
-			session.wialon._session = {
+			session._session = {
 				eid : 'cfdf5e9dc900991577c10e3934b6c8f0'
 			};
 

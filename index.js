@@ -6,5 +6,9 @@
 *   @module wialon
 */
 
-module.exports = require( './lib/wialon' );
+var Wialon = require( './lib/wialon' );
+
+module.exports = function ( opts ) {
+	return new Wialon( opts );
+};
 

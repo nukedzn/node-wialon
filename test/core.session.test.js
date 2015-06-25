@@ -25,6 +25,25 @@ describe( 'session', function() {
 	} );
 
 
+	context( 'when credentials are passed into the constructor', function ( done ) {
+		it( 'should create a session promise', function () {
+			var sess = new Session ( {
+				credentials : { }
+			} );
+
+			expect( sess._session ).to.be.instanceof( Promise );
+			sess._session
+				.then( function () {
+					done( new Error( 'session promise should have resolved with an error' ) );
+				} )
+				.catch( function ( e ) {
+					expect( e ).to.be.instanceof( Error );
+					done();
+				} );
+		} );
+	} );
+
+
 	describe( 'endpoint', function () {
 		it( 'should have a default url', function() {
 			expect( session._options.url ).to.not.exist;
@@ -123,6 +142,28 @@ describe( 'session', function() {
 				done();
 			} );
 		} );
+
+		it( 'should resolve a session promise', function ( done ) {
+			var scope = nock( session.endpoint() )
+				.post( '?svc=core/login' )
+				.reply( 200, { eid : 'cfdf5e9dc900991577c10e3934b6c8f0' } )
+				.post( '?svc=dummy' )
+				.reply( 200, { error : 0 } );
+
+			var sess = new Session( {
+				credentials : {
+					username : 'dummy',
+					password : 'pass'
+				}
+			} );
+
+			expect( sess._session ).to.be.instanceof( Promise );
+			sess.request( 'dummy', {}, function ( err, data ) {
+				expect( scope.isDone() ).to.be.true;
+				done( err );
+			} );
+		} );
+
 
 		context( 'when there is no callback', function () {
 			it( 'should use the internal callback method', function ( done ) {

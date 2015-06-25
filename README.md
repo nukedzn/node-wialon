@@ -19,32 +19,51 @@ $ npm install --save wialon
 
 ## Usage
 
-Send API requests using session object:
+Initialising a session:
 ``` js
-var session = require( 'wialon' )().session;
+var wialon = require( 'wialon' );
 
-// login credentials
-var credentials = {
-	username : 'wialon_test',
-	password : 'test'
-};
-
-// start a session
-session.start( credentials, function ( err, data ) {
+// using session.start()
+var session = wialon().session;
+session.start( { username : 'user', password : 'pass' }, function ( err, data ) {
 	console.log( data );
 } );
 
-// send a request
-session.request( 'core/search_items', params, function ( err, data ) {
 
+// auto-initialise a session by passing in credentials to the factory method
+var opts = {
+	// login credentials
+	credentials : {
+		username : 'wialon_test',
+		password : 'test'
+	}
+};
+
+var session = wialon( opts ).session;
+```
+
+Send API requests using session object:
+``` js
+session.request( 'core/search_items', params, function ( err, data ) {
+	console.log( data );
 } );
 
-// close session
+// close the session
 session.end( function ( err, data ) {
 	console.log( data );
 } );
 ```
 
+Using search helpers:
+``` js
+// grab a new search instance
+var search = wialon( opts ).search();
+
+// search for units
+search.units( '*', function ( err, data ) {
+	console.log( data );
+} );
+```
 
 ## API Documentation
 

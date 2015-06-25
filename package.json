@@ -3,6 +3,10 @@
   "version": "0.0.8",
   "description": "NodeJS wrapper for Wialon Remote API",
   "main": "index.js",
+  "engines": {
+    "iojs": ">=2.0",
+    "node": ">=0.12"
+  },
   "scripts": {
     "coverage": "istanbul cover _mocha -- --reporter spec",
     "coveralls": "istanbul cover _mocha --report lcovonly -- --reporter spec && cat ./coverage/lcov.info | coveralls",

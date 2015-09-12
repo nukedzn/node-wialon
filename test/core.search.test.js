@@ -8,7 +8,7 @@ var expect  = chai.expect;
 var wialon  = require( '../' )();
 var session = wialon.session;
 
-describe( 'search', function () {
+describe( 'core/search', function () {
 
 	// search object placeholder
 	var search = {};
@@ -110,11 +110,11 @@ describe( 'search', function () {
 	} );
 
 
-	describe( 'geofences', function () {
-		it( 'should return geofence data', function ( done ) {
+	describe( 'zones', function () {
+		it( 'should return basic zone data', function ( done ) {
 			var scope = nock( session.endpoint() )
 				.post( '?svc=core/search_items' )
-				.replyWithFile( 200, __dirname + '/fixtures/search.geofences.json' );
+				.replyWithFile( 200, __dirname + '/fixtures/search.zones.json' );
 
 			search.geofences( '*', function ( err, data ) {
 				expect( err ).to.be.null;

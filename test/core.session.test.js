@@ -7,7 +7,7 @@ var chai    = require( 'chai' );
 var expect  = chai.expect;
 var Session = require( '../lib/core/session' );
 
-describe( 'session', function() {
+describe( 'core/session', function() {
 
 	// session object placeholder
 	var session = {};

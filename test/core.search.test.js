@@ -23,10 +23,11 @@ describe( 'core/search', function () {
 			.post( '?svc=token/login' )
 			.reply( 200, { eid : '0db2e9fb939253004ac36665c272dd77' } );
 
-		session.start( authz, function ( err, session ) {
-			expect( err ).to.be.null;
-			done();
-		} );
+		session.start( authz )
+			.then( function ( session ) {
+				done();
+			} )
+			.catch( done );
 	} );
 
 	beforeEach( function () {
@@ -56,24 +57,15 @@ describe( 'core/search', function () {
 				.post( '?svc=core/search_items' )
 				.replyWithFile( 200, __dirname + '/fixtures/search.units.json' );
 
-			search.search( 'avl_unit', '*', 0x00000001, function ( err, data ) {
-				expect( err ).to.be.null;
-				expect( data ).to.be.an.instanceof( Array );
-				expect( scope.isDone() ).to.be.true;
-				done();
-			} );
+			search.search( 'avl_unit', '*', 0x00000001 )
+				.then( function ( data ) {
+					expect( data ).to.be.an.instanceof( Array );
+					expect( scope.isDone() ).to.be.true;
+					done();
+				} )
+				.catch( done );
 		} );
 
-		context( 'when there is no callback', function () {
-			it( 'should use the internal callback method', function ( done ) {
-				var scope = nock( session.endpoint() )
-					.post( '?svc=core/search_items' )
-					.reply( 200, { items : [] } );
-
-				search.search( 'avl_unit', '*', 0x00000001 );
-				done();
-			} );
-		} );
 
 		context( 'when there is an error response', function () {
 			it( 'should return an error object', function ( done ) {
@@ -81,11 +73,12 @@ describe( 'core/search', function () {
 					.post( '?svc=core/search_items' )
 					.reply( 200, { error : 4 } );
 
-				search.search( 'avl_unit', '*', 'x', function ( err, data ) {
-					expect( err ).to.be.an.instanceof( Error );
-					expect( err.message ).to.be.string( 'API error: 4' );
-					done();
-				} );
+				search.search( 'avl_unit', '*', 'x' )
+					.catch( function ( err ) {
+						expect( err ).to.be.an.instanceof( Error );
+						expect( err.message ).to.be.string( 'API error: 4' );
+						done();
+					} );
 			} );
 		} );
 	} );
@@ -97,15 +90,16 @@ describe( 'core/search', function () {
 				.post( '?svc=core/search_items' )
 				.replyWithFile( 200, __dirname + '/fixtures/search.units.json' );
 
-			search.units( '*', function ( err, data ) {
-				expect( err ).to.be.null;
-				expect( data ).to.be.an.instanceof( Array );
-				expect( data ).to.have.length.of.at.least( 1 );
-				expect( data[0] ).to.have.all.keys( [
-					'nm', 'cls', 'id', 'mu', 'uacl'
-				] );
-				done();
-			} );
+			search.units( '*' )
+				.then( function ( data ) {
+					expect( data ).to.be.an.instanceof( Array );
+					expect( data ).to.have.length.of.at.least( 1 );
+					expect( data[0] ).to.have.all.keys( [
+						'nm', 'cls', 'id', 'mu', 'uacl'
+					] );
+					done();
+				} )
+				.catch( done );
 		} );
 	} );
 
@@ -116,15 +110,16 @@ describe( 'core/search', function () {
 				.post( '?svc=core/search_items' )
 				.replyWithFile( 200, __dirname + '/fixtures/search.zones.json' );
 
-			search.geofences( '*', function ( err, data ) {
-				expect( err ).to.be.null;
-				expect( data ).to.be.an.instanceof( Array );
-				expect( data ).to.have.length.of.at.least( 1 );
-				expect( data[0] ).to.have.all.keys( [
-					'nm', 'cls', 'id', 'mu', 'uacl', 'zl'
-				] );
-				done();
-			} );
+			search.geofences( '*' )
+				.then( function ( data ) {
+					expect( data ).to.be.an.instanceof( Array );
+					expect( data ).to.have.length.of.at.least( 1 );
+					expect( data[0] ).to.have.all.keys( [
+						'nm', 'cls', 'id', 'mu', 'uacl', 'zl'
+					] );
+					done();
+				} )
+				.catch( done );
 		} );
 	} );
 
@@ -135,16 +130,17 @@ describe( 'core/search', function () {
 				.post( '?svc=core/search_items' )
 				.replyWithFile( 200, __dirname + '/fixtures/search.retranslators.json' );
 
-			search.retranslators( '*', function ( err, data ) {
-				expect( err ).to.be.null;
-				expect( data ).to.be.an.instanceof( Array );
-				expect( data ).to.have.length.of.at.least( 1 );
-				expect( data[0] ).to.have.all.keys( [
-					'nm', 'cls', 'id', 'mu', 'uacl',
-					'rtro', 'rtrc', 'rtru', 'rtrst'
-				] );
-				done();
-			} );
+			search.retranslators( '*' )
+				.then( function ( data ) {
+					expect( data ).to.be.an.instanceof( Array );
+					expect( data ).to.have.length.of.at.least( 1 );
+					expect( data[0] ).to.have.all.keys( [
+						'nm', 'cls', 'id', 'mu', 'uacl',
+						'rtro', 'rtrc', 'rtru', 'rtrst'
+					] );
+					done();
+				} )
+				.catch( done );
 		} );
 	} );
 

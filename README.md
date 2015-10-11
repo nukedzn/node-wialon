@@ -28,9 +28,13 @@ var wialon = require( 'wialon' );
 
 // using session.start()
 var session = wialon().session;
-session.start( { token : '<access token>' }, function ( err, data ) {
-	console.log( data );
-} );
+session.start( { token : '<access token>' } )
+	.then( function ( data ) {
+		console.log( data );
+	} )
+	.catch( function ( err ) {
+		console.log( err );
+	} );
 
 
 // auto-initialise a session by passing in authorization parameters to the factory method
@@ -47,14 +51,14 @@ var session = wialon( opts ).session;
 
 Send API requests using session object:
 ``` js
-session.request( 'core/search_items', params, function ( err, data ) {
-	console.log( data );
-} );
+session.request( 'core/search_items', params )
+	.then( function ( data ) {
+		console.log( data );
+	} )
+	.catch( function ( err ) {
+		console.log( err );
+	} );
 
-// close the session
-session.end( function ( err, data ) {
-	console.log( data );
-} );
 ```
 
 Using search helpers:
@@ -63,9 +67,13 @@ Using search helpers:
 var search = wialon( opts ).search();
 
 // search for units
-search.units( '*', function ( err, data ) {
-	console.log( data );
-} );
+search.units( '*' )
+	.then( function ( data ) {
+		console.log( data );
+	} )
+	.catch( function ( err ) {
+		console.log( err )
+	} );
 ```
 
 ## API Documentation

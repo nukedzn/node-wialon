@@ -6,7 +6,7 @@ var chai    = require( 'chai' );
 var expect  = chai.expect;
 var nock    = require( 'nock' );
 var wialon  = require( '../' );
-var Session = require( '../lib/core/session' );
+var Session = require( '../lib/token/session' );
 
 describe( 'wialon', function() {
 
@@ -33,21 +33,21 @@ describe( 'wialon', function() {
 	} );
 
 
-	context( 'when passing credentials as args to factory method', function () {
+	context( 'when passing authorization parameters as args to factory method', function () {
 
 		it( 'should initialise a session', function ( done ) {
 
 			// mock API endpoints
 			var sess  = new Session();
 			var scope = nock( sess.endpoint() )
-				.post( '?svc=core/login' )
+				.post( '?svc=token/login' )
 				.reply( 200, { eid : 'cfdf5e9dc900991577c10e3934b6c8f0' } );
 
 			// initialise using the factory method
 			var w = wialon( {
-				credentials : {
-					username : 'dummy',
-					password : 'pass'
+				authz : {
+					token : 'token',
+					operateAs : 'dummy'
 				}
 			} );
 

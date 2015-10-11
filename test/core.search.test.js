@@ -14,16 +14,16 @@ describe( 'core/search', function () {
 	var search = {};
 
 	before( function ( done ) {
-		var credentials = {
-			username : 'dummy',
-			password : 'pass'
+		var authz = {
+			token : 'token',
+			operateAs : 'dummy'
 		};
 
 		var scope = nock( session.endpoint() )
-			.post( '?svc=core/login' )
+			.post( '?svc=token/login' )
 			.reply( 200, { eid : '0db2e9fb939253004ac36665c272dd77' } );
 
-		session.start( credentials, function ( err, session ) {
+		session.start( authz, function ( err, session ) {
 			expect( err ).to.be.null;
 			done();
 		} );

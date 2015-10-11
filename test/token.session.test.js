@@ -5,9 +5,9 @@
 var nock    = require( 'nock' );
 var chai    = require( 'chai' );
 var expect  = chai.expect;
-var Session = require( '../lib/core/session' );
+var Session = require( '../lib/token/session' );
 
-describe( 'core/session', function() {
+describe( 'token/session', function() {
 
 	// session object placeholder
 	var session = {};
@@ -25,10 +25,10 @@ describe( 'core/session', function() {
 	} );
 
 
-	context( 'when credentials are passed into the constructor', function ( done ) {
+	context( 'when authorization params are passed into the constructor', function ( done ) {
 		it( 'should create a session promise', function () {
 			var sess = new Session ( {
-				credentials : { }
+				authz : { }
 			} );
 
 			expect( sess._session ).to.be.instanceof( Promise );
@@ -54,26 +54,26 @@ describe( 'core/session', function() {
 
 	describe( 'start', function () {
 
-		var credentials = {
-			username : 'dummy',
-			password : 'pass'
+		var authz = {
+			token : 'token',
+			operateAs : 'dummy'
 		};
 
 
-		it( 'should validate credentials', function ( done ) {
+		it( 'should validate authorization params', function ( done ) {
 			session.start( {}, function ( err, data ) {
 				expect( err ).to.be.an.instanceof( Error );
-				expect( err.message ).to.be.string( 'Invalid credentials' );
+				expect( err.message ).to.be.string( 'Invalid authorization parameters' );
 				done();
 			} );
 		} );
 
 		it( 'should make a login request', function ( done ) {
 			var scope = nock( session.endpoint() )
-				.post( '?svc=core/login' )
+				.post( '?svc=token/login' )
 				.reply( 200, { eid : 'cfdf5e9dc900991577c10e3934b6c8f0' } );
 
-			session.start( credentials, function ( err, session ) {
+			session.start( authz, function ( err, session ) {
 				expect( err ).to.be.null;
 				expect( scope.isDone() ).to.be.true;
 				done();
@@ -83,10 +83,10 @@ describe( 'core/session', function() {
 		context( 'when there is no callback', function () {
 			it( 'should use the internal callback method', function ( done ) {
 				var scope = nock( session.endpoint() )
-					.post( '?svc=core/login' )
+					.post( '?svc=token/login' )
 					.reply( 200, { eid : 'cfdf5e9dc900991577c10e3934b6c8f0' } );
 
-				session.start( credentials );
+				session.start( authz );
 				done();
 			} );
 		} );
@@ -94,10 +94,10 @@ describe( 'core/session', function() {
 		context( 'when API credentials are incorrect', function () {
 			it( 'should return an error object', function ( done ) {
 				var scope = nock( session.endpoint() )
-					.post( '?svc=core/login' )
+					.post( '?svc=token/login' )
 					.reply( 200, { error : 8 } );
 
-				session.start( credentials, function ( err, sess ) {
+				session.start( authz, function ( err, sess ) {
 					expect( err ).to.be.an.instanceof( Error );
 					expect( err.message ).to.be.string( 'API error: 8' );
 					done();
@@ -111,7 +111,7 @@ describe( 'core/session', function() {
 	describe( 'request', function () {
 
 		it( 'should call the endpoint url', function ( done ) {
-			var svc    = 'core/login';
+			var svc    = 'token/login';
 			var scope  = nock( session.endpoint() )
 				.post( '?svc=' + svc )
 				.reply( 200, { error : 0 } );
@@ -123,7 +123,7 @@ describe( 'core/session', function() {
 		} );
 
 		it( 'should return API errors', function ( done ) {
-			var svc    = 'core/login';
+			var svc    = 'token/login';
 			var scope  = nock( session.endpoint() )
 				.post( '?svc=' + svc )
 				.reply( 200, { error : 8 } );
@@ -145,15 +145,15 @@ describe( 'core/session', function() {
 
 		it( 'should resolve a session promise', function ( done ) {
 			var scope = nock( session.endpoint() )
-				.post( '?svc=core/login' )
+				.post( '?svc=token/login' )
 				.reply( 200, { eid : 'cfdf5e9dc900991577c10e3934b6c8f0' } )
 				.post( '?svc=dummy' )
 				.reply( 200, { error : 0 } );
 
 			var sess = new Session( {
-				credentials : {
-					username : 'dummy',
-					password : 'pass'
+				authz : {
+					token : 'token',
+					operateAs : 'dummy'
 				}
 			} );
 
@@ -167,7 +167,7 @@ describe( 'core/session', function() {
 
 		context( 'when there is no callback', function () {
 			it( 'should use the internal callback method', function ( done ) {
-				var svc    = 'core/login';
+				var svc    = 'token/login';
 				var scope  = nock( session.endpoint() )
 					.post( '?svc=' + svc )
 					.reply( 200, { error : 0 } );
@@ -179,7 +179,7 @@ describe( 'core/session', function() {
 
 		context( 'when failed to reach the API endpoint', function () {
 			it( 'should return an error object', function ( done ) {
-				var svc    = 'core/login';
+				var svc    = 'token/login';
 				var scope  = nock( session.endpoint() )
 					.post( '?svc=' + svc )
 					.replyWithError( 'API request failed' );
@@ -197,7 +197,7 @@ describe( 'core/session', function() {
 
 		context( 'when API response is not JSON', function () {
 			it( 'should return an error object', function ( done ) {
-				var svc    = 'core/login';
+				var svc    = 'token/login';
 				var scope  = nock( session.endpoint() )
 					.post( '?svc=' + svc )
 					.reply( 200, 'not JSON' );
@@ -209,25 +209,6 @@ describe( 'core/session', function() {
 			} );
 		} );
 
-	} );
-
-	describe( 'end', function () {
-		it( 'should make a logout request', function ( done ) {
-			var scope = nock( session.endpoint() )
-				.post( '?svc=core/logout' )
-				.reply( 200, { error : 0 } );
-
-			// session data mock
-			session._session = {
-				eid : 'cfdf5e9dc900991577c10e3934b6c8f0'
-			};
-
-			session.end( function ( err, data ) {
-				expect( err ).to.be.null;
-				expect( scope.isDone() ).to.be.true;
-				done();
-			} );
-		} );
 	} );
 
 } );

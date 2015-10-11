@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: lib/wialon.js</title>
+    <title>JSDoc: Source: lib/resources/zones.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: lib/wialon.js</h1>
+    <h1 class="page-title">Source: lib/resources/zones.js</h1>
 
     
 
@@ -29,49 +29,45 @@
             <pre class="prettyprint source linenums"><code>
 'use strict';
 
-var debug   = require( 'debug' )( 'wialon' );
-var apis    = require( './apis' );
-var Session = require( './token/session' );
+var debug = require( 'debug' )( 'wialon:resources:zones' );
+
 
 /**
-*   Wialon Remote API wrapper class
+*   Zone resources API
 *
 *   @constructor
-*   @param {object} opts - Constructor options
 */
-var W = function ( opts ) {
-
-	this.options( opts );
-	this.bindAPIs( apis );
-
-	this.session = new Session( opts );
+var Zones = function () {
 
 };
 
 
 /**
-*   Set options
+*   Get detailed information for a set of zone resources
 *
-*   @param {object} opts - Options
-*/
-W.prototype.options = function ( opts ) {
-	this._options = opts || {};
-};
-
-
-/**
-*   Bind API endpoints
+*   @param {string} resourceId - Resource ID
+*   @param {array|string} ids  - Zone IDs
+*   @returns {Promise}
 *
-*   @private
+*   @see {@link http://sdk.wialon.com/wiki/en/kit/remoteapi/apiref/resource/get_zone_data}
 */
-W.prototype.bindAPIs = function ( apis ) {
-	for ( var api in apis ) {
-		this[api] = apis[api].bind( this );
+Zones.prototype.data = function ( resourceId, ids ) {
+
+	if (! Array.isArray( ids ) ) {
+		ids = [ids];
 	}
+
+	var params = {
+		itemId : resourceId,
+		col    : ids
+	};
+
+	return this.wialon.session.request( 'resource/get_zone_data', params );
+
 };
 
 
-module.exports = W;
+module.exports = Zones;
 
 </code></pre>
         </article>

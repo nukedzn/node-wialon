@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: W</title>
+    <title>JSDoc: Class: Zones</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: W</h1>
+    <h1 class="page-title">Class: Zones</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2>
-        W
+        Zones
         </h2>
         
     
@@ -42,14 +42,14 @@
 
     
 
-    <h4 class="name" id="W"><span class="type-signature"></span>new W<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Zones"><span class="type-signature"></span>new Zones<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Wialon Remote API wrapper class
+    Zone resources API
 </div>
 
 
@@ -58,55 +58,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>opts</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Constructor options</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -142,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_wialon.js.html">lib/wialon.js</a>, <a href="lib_wialon.js.html#line14">line 14</a>
+        <a href="lib_resources_zones.js.html">lib/resources/zones.js</a>, <a href="lib_resources_zones.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -191,14 +142,14 @@
 
     
 
-    <h4 class="name" id="options"><span class="type-signature"></span>options<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="data"><span class="type-signature"></span>data<span class="signature">(resourceId, ids)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
 
 
 <div class="description">
-    Set options
+    Get detailed information for a set of zone resources
 </div>
 
 
@@ -234,13 +185,13 @@
 
         <tr>
             
-                <td class="name"><code>opts</code></td>
+                <td class="name"><code>resourceId</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
@@ -250,7 +201,33 @@
 
             
 
-            <td class="description last">Options</td>
+            <td class="description last">Resource ID</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ids</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Zone IDs</td>
         </tr>
 
     
@@ -291,12 +268,19 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_wialon.js.html">lib/wialon.js</a>, <a href="lib_wialon.js.html#line29">line 29</a>
+        <a href="lib_resources_zones.js.html">lib/resources/zones.js</a>, <a href="lib_resources_zones.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="http://sdk.wialon.com/wiki/en/kit/remoteapi/apiref/resource/get_zone_data">http://sdk.wialon.com/wiki/en/kit/remoteapi/apiref/resource/get_zone_data</a></li>
+        </ul>
+    </dd>
     
 
     
@@ -314,6 +298,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 

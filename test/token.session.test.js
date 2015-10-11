@@ -61,11 +61,12 @@ describe( 'token/session', function() {
 
 
 		it( 'should validate authorization params', function ( done ) {
-			session.start( {}, function ( err, data ) {
-				expect( err ).to.be.an.instanceof( Error );
-				expect( err.message ).to.be.string( 'Invalid authorization parameters' );
-				done();
-			} );
+			session.start( {} )
+				.catch( function ( err ) {
+					expect( err ).to.be.an.instanceof( Error );
+					expect( err.message ).to.be.string( 'Invalid authorization parameters' );
+					done();
+				} );
 		} );
 
 		it( 'should make a login request', function ( done ) {
@@ -73,23 +74,14 @@ describe( 'token/session', function() {
 				.post( '?svc=token/login' )
 				.reply( 200, { eid : 'cfdf5e9dc900991577c10e3934b6c8f0' } );
 
-			session.start( authz, function ( err, session ) {
-				expect( err ).to.be.null;
-				expect( scope.isDone() ).to.be.true;
-				done();
-			} );
+			session.start( authz )
+				.then( function () {
+					expect( scope.isDone() ).to.be.true;
+					done();
+				} )
+				.catch( done );
 		} );
 
-		context( 'when there is no callback', function () {
-			it( 'should use the internal callback method', function ( done ) {
-				var scope = nock( session.endpoint() )
-					.post( '?svc=token/login' )
-					.reply( 200, { eid : 'cfdf5e9dc900991577c10e3934b6c8f0' } );
-
-				session.start( authz );
-				done();
-			} );
-		} );
 
 		context( 'when API credentials are incorrect', function () {
 			it( 'should return an error object', function ( done ) {
@@ -97,11 +89,12 @@ describe( 'token/session', function() {
 					.post( '?svc=token/login' )
 					.reply( 200, { error : 8 } );
 
-				session.start( authz, function ( err, sess ) {
-					expect( err ).to.be.an.instanceof( Error );
-					expect( err.message ).to.be.string( 'API error: 8' );
-					done();
-				} );
+				session.start( authz )
+					.catch( function ( err ) {
+						expect( err ).to.be.an.instanceof( Error );
+						expect( err.message ).to.be.string( 'API error: 8' );
+						done();
+					} );
 			} );
 		} );
 
@@ -116,10 +109,12 @@ describe( 'token/session', function() {
 				.post( '?svc=' + svc )
 				.reply( 200, { error : 0 } );
 
-			session.request( svc, {}, function ( err, data ) {
-				expect( scope.isDone() ).to.be.true;
-				done();
-			} );
+			session.request( svc, {} )
+				.then( function ( data ) {
+					expect( scope.isDone() ).to.be.true;
+					done();
+				} )
+				.catch( done );
 		} );
 
 		it( 'should return API errors', function ( done ) {
@@ -128,19 +123,21 @@ describe( 'token/session', function() {
 				.post( '?svc=' + svc )
 				.reply( 200, { error : 8 } );
 
-			session.request( svc, {}, function ( err, data ) {
-				expect( err ).to.be.an.instanceof( Error );
-				expect( err.message ).to.be.string( 'API error: 8' );
-				done();
-			} );
+			session.request( svc, {} )
+				.catch( function ( err ) {
+					expect( err ).to.be.an.instanceof( Error );
+					expect( err.message ).to.be.string( 'API error: 8' );
+					done();
+				} );
 		} );
 
 		it( 'should validate the session when not making a login request', function ( done ) {
-			session.request( 'dummy', {}, function ( err, data ) {
-				expect( err ).to.be.an.instanceof( Error );
-				expect( err.message ).to.be.string( 'Invalid session' );
-				done();
-			} );
+			session.request( 'dummy', {} )
+				.catch( function ( err ) {
+					expect( err ).to.be.an.instanceof( Error );
+					expect( err.message ).to.be.string( 'Invalid session' );
+					done();
+				} );
 		} );
 
 		it( 'should resolve a session promise', function ( done ) {
@@ -158,24 +155,14 @@ describe( 'token/session', function() {
 			} );
 
 			expect( sess._session ).to.be.instanceof( Promise );
-			sess.request( 'dummy', {}, function ( err, data ) {
-				expect( scope.isDone() ).to.be.true;
-				done( err );
-			} );
+			sess.request( 'dummy', {} )
+				.then( function ( data ) {
+					expect( scope.isDone() ).to.be.true;
+					done();
+				} )
+				.catch( done );
 		} );
 
-
-		context( 'when there is no callback', function () {
-			it( 'should use the internal callback method', function ( done ) {
-				var svc    = 'token/login';
-				var scope  = nock( session.endpoint() )
-					.post( '?svc=' + svc )
-					.reply( 200, { error : 0 } );
-
-				session.request( svc, {} );
-				done();
-			} );
-		} );
 
 		context( 'when failed to reach the API endpoint', function () {
 			it( 'should return an error object', function ( done ) {
@@ -184,14 +171,15 @@ describe( 'token/session', function() {
 					.post( '?svc=' + svc )
 					.replyWithError( 'API request failed' );
 
-				session.request( svc, {}, function ( err, data ) {
-					expect( err ).to.be.an.instanceof( Error );
-					expect( err.message ).to.be.string( 'API request failed' );
+				session.request( svc, {} )
+					.catch( function ( err ) {
+						expect( err ).to.be.an.instanceof( Error );
+						expect( err.message ).to.be.string( 'API request failed' );
 
-					// clear all nocks which seems to be needed after replyWithError()
-					nock.cleanAll();
-					done();
-				} );
+						// clear all nocks which seems to be needed after replyWithError()
+						nock.cleanAll();
+						done();
+					} );
 			} );
 		} );
 
@@ -202,10 +190,11 @@ describe( 'token/session', function() {
 					.post( '?svc=' + svc )
 					.reply( 200, 'not JSON' );
 
-				session.request( svc, {}, function ( err, data ) {
-					expect( err ).to.be.an.instanceof( SyntaxError );
-					done();
-				} );
+				session.request( svc, {} )
+					.catch( function ( err ) {
+						expect( err ).to.be.an.instanceof( SyntaxError );
+						done();
+					} );
 			} );
 		} );
 

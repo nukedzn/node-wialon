@@ -23,10 +23,11 @@ describe( 'resources/zones', function () {
 			.post( '?svc=token/login' )
 			.reply( 200, { eid : '0db2e9fb939253004ac36665c272dd77' } );
 
-		session.start( authz, function ( err, session ) {
-			expect( err ).to.be.null;
-			done();
-		} );
+		session.start( authz )
+			.then( function ( session ) {
+				done();
+			} )
+			.catch( done );
 	} );
 
 	beforeEach( function () {
@@ -39,14 +40,16 @@ describe( 'resources/zones', function () {
 			.post( '?svc=resource/get_zone_data' )
 			.replyWithFile( 200, __dirname + '/fixtures/resources.zones.data.json' );
 
-		zones.data( 1, [ 1 ], function ( err, data ) {
-			expect( data ).to.be.an.instanceof( Array );
-			expect( data ).to.have.length( 1 );
-			expect( data[0] ).to.have.all.keys( [
-				'n', 'd', 'id', 'rid', 't', 'w', 'f', 'c', 'b', 'p', 'ct', 'mt'
-			] );
-			done( err );
-		} );
+		zones.data( 1, [ 1 ] )
+			.then( function ( data ) {
+				expect( data ).to.be.an.instanceof( Array );
+				expect( data ).to.have.length( 1 );
+				expect( data[0] ).to.have.all.keys( [
+					'n', 'd', 'id', 'rid', 't', 'w', 'f', 'c', 'b', 'p', 'ct', 'mt'
+				] );
+				done();
+			} )
+			.catch( done );
 	} );
 
 
@@ -57,14 +60,16 @@ describe( 'resources/zones', function () {
 				.post( '?svc=resource/get_zone_data' )
 				.replyWithFile( 200, __dirname + '/fixtures/resources.zones.data.json' );
 
-			zones.data( 1, 1, function ( err, data ) {
-				expect( data ).to.be.an.instanceof( Array );
-				expect( data ).to.have.length( 1 );
-				expect( data[0] ).to.have.all.keys( [
-					'n', 'd', 'id', 'rid', 't', 'w', 'f', 'c', 'b', 'p', 'ct', 'mt'
-				] );
-				done( err );
-			} );
+			zones.data( 1, 1 )
+				.then( function (  data ) {
+					expect( data ).to.be.an.instanceof( Array );
+					expect( data ).to.have.length( 1 );
+					expect( data[0] ).to.have.all.keys( [
+						'n', 'd', 'id', 'rid', 't', 'w', 'f', 'c', 'b', 'p', 'ct', 'mt'
+					] );
+					done();
+				} )
+				.catch( done );
 		} );
 
 	} );

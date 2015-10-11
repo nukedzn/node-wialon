@@ -42,28 +42,31 @@
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<div class="highlight highlight-sh"><pre>$ npm install --save wialon</pre></div>
+<div class="highlight highlight-source-shell"><pre>$ npm install --save wialon</pre></div>
 
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
+<p><strong>Node:</strong> From 1st of October 2015 you will need to use the new token login method. Use <a href="https://hosting.wialon.com/login.html?client_id=node-wialon&amp;access_type=0xfff&amp;activation_time=0&amp;duration=0&amp;lang=en&amp;flags=0x1">this link</a>
+to generate an access token.</p>
+
 <p>Initialising a session:</p>
 
-<div class="highlight highlight-js"><pre><span class="pl-k">var</span> wialon <span class="pl-k">=</span> <span class="pl-c1">require</span>( <span class="pl-s"><span class="pl-pds">'</span>wialon<span class="pl-pds">'</span></span> );
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> wialon <span class="pl-k">=</span> <span class="pl-c1">require</span>( <span class="pl-s"><span class="pl-pds">'</span>wialon<span class="pl-pds">'</span></span> );
 
 <span class="pl-c">// using session.start()</span>
 <span class="pl-k">var</span> session <span class="pl-k">=</span> wialon().session;
-session.<span class="pl-c1">start</span>( { username <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>user<span class="pl-pds">'</span></span>, password <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>pass<span class="pl-pds">'</span></span> }, <span class="pl-k">function</span> ( <span class="pl-smi">err</span>, <span class="pl-smi">data</span> ) {
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>( data );
+session.<span class="pl-c1">start</span>( { token <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;access token&gt;<span class="pl-pds">'</span></span> }, <span class="pl-k">function</span> ( <span class="pl-smi">err</span>, <span class="pl-smi">data</span> ) {
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>( data );
 } );
 
 
-<span class="pl-c">// auto-initialise a session by passing in credentials to the factory method</span>
+<span class="pl-c">// auto-initialise a session by passing in authorization parameters to the factory method</span>
 <span class="pl-k">var</span> opts <span class="pl-k">=</span> {
-    <span class="pl-c">// login credentials</span>
-    credentials <span class="pl-k">:</span> {
-        username <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>wialon_test<span class="pl-pds">'</span></span>,
-        password <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>
+    <span class="pl-c">// authz params</span>
+    authz <span class="pl-k">:</span> {
+        token <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;access token&gt;<span class="pl-pds">'</span></span>,
+        operateAs <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>username<span class="pl-pds">'</span></span>
     }
 };
 
@@ -71,23 +74,23 @@ session.<span class="pl-c1">start</span>( { username <span class="pl-k">:</span>
 
 <p>Send API requests using session object:</p>
 
-<div class="highlight highlight-js"><pre>session.request( <span class="pl-s"><span class="pl-pds">'</span>core/search_items<span class="pl-pds">'</span></span>, params, <span class="pl-k">function</span> ( <span class="pl-smi">err</span>, <span class="pl-smi">data</span> ) {
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>( data );
+<div class="highlight highlight-source-js"><pre>session.request( <span class="pl-s"><span class="pl-pds">'</span>core/search_items<span class="pl-pds">'</span></span>, params, <span class="pl-k">function</span> ( <span class="pl-smi">err</span>, <span class="pl-smi">data</span> ) {
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>( data );
 } );
 
 <span class="pl-c">// close the session</span>
 session.end( <span class="pl-k">function</span> ( <span class="pl-smi">err</span>, <span class="pl-smi">data</span> ) {
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>( data );
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>( data );
 } );</pre></div>
 
 <p>Using search helpers:</p>
 
-<div class="highlight highlight-js"><pre><span class="pl-c">// grab a new search instance</span>
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// grab a new search instance</span>
 <span class="pl-k">var</span> search <span class="pl-k">=</span> wialon( opts ).<span class="pl-c1">search</span>();
 
 <span class="pl-c">// search for units</span>
 search.units( <span class="pl-s"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> ( <span class="pl-smi">err</span>, <span class="pl-smi">data</span> ) {
-    <span class="pl-en">console</span><span class="pl-c1">.log</span>( data );
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>( data );
 } );</pre></div>
 
 <h2>

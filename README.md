@@ -19,7 +19,7 @@ $ npm install --save wialon
 
 ## Usage
 
-**Node:** From 1st of October 2015 you will need to use the new token login method. Use [this link](https://hosting.wialon.com/login.html?client_id=node-wialon&access_type=0xfff&activation_time=0&duration=0&lang=en&flags=0x1)
+**Note:** From 1st of October 2015 you will need to use the new token login method. Use [this link](https://hosting.wialon.com/login.html?client_id=node-wialon&access_type=0xfff&activation_time=0&duration=0&lang=en&flags=0x1)
 to generate an access token.
 
 Initialising a session:

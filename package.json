@@ -28,14 +28,14 @@
   "dependencies": {
     "debug": "^2.2.0",
     "extend": "^3.0.0",
-    "request": "^2.61.0"
+    "request": "^2.64.0"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
+    "chai": "^3.3.0",
     "coveralls": "^2.11.2",
-    "istanbul": "^0.3.19",
+    "istanbul": "^0.3.22",
     "jshint": "^2.8.0",
-    "mocha": "^2.3.2",
-    "nock": "^2.10.0"
+    "mocha": "^2.3.3",
+    "nock": "^2.15.0"
   }
 }

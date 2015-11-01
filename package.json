@@ -14,7 +14,7 @@
     "lint": "jshint index.js lib test",
     "test": "mocha"
   },
-  "author": "Uditha Atukorala <udi@geniusse.com>",
+  "author": "Uditha Atukorala <ua@nuked.zone>",
   "license": "ISC",
   "repository": "nukedzn/node-wialon",
   "keywords": [
